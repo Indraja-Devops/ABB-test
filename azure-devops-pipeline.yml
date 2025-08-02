@@ -1,35 +1,42 @@
-# >net application
 trigger:
   branches:
     include:
-      - main
-      - develop
-      - release/*
+      - main  # change if needed
 
 pool:
   vmImage: 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
+  outputDir: '$(Build.ArtifactStagingDirectory)/publish'
 
 steps:
+# Install .NET SDK
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '8.x.x'  # specify your .NET version
+    version: '8.0.x'  # Use your .NET version
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
+# Restore dependencies
 - script: dotnet restore
-  displayName: 'Restore NuGet packages'
+  displayName: 'Restore NuGet Packages'
 
+# Build solution
 - script: dotnet build --configuration $(buildConfiguration) --no-restore
-  displayName: 'Build project'
+  displayName: 'Build Solution'
 
-- script: dotnet test --configuration $(buildConfiguration) --no-build --collect:"Code Coverage"
-  displayName: 'Run tests'
+# Run unit tests
+- script: dotnet test --no-build --configuration $(buildConfiguration) --logger:trx
+  displayName: 'Run Unit Tests'
 
+# Publish the app
+- script: dotnet publish --configuration $(buildConfiguration) --output $(outputDir)
+  displayName: 'Publish Application'
+
+# Publish artifacts for later use or deployment
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    pathToPublish: '$(outputDir)'
     artifactName: 'drop'
     publishLocation: 'Container'
