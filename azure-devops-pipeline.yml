@@ -1,0 +1,79 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  dotnetProjectPath: 'src/dotnet-app/MyApp.csproj'
+  nodeAppPath: 'src/node-app'
+
+steps:
+
+# .NET Build & Test
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '8.x'
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- task: DotNetCoreCLI@2
+  displayName: 'Restore .NET dependencies'
+  inputs:
+    command: 'restore'
+    projects: '$(dotnetProjectPath)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build .NET project'
+  inputs:
+    command: 'build'
+    projects: '$(dotnetProjectPath)'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Run .NET tests'
+  inputs:
+    command: 'test'
+    projects: '$(dotnetProjectPath)'
+    arguments: '--configuration $(buildConfiguration) --no-build'
+
+# Node.js Build & Test
+- task: NodeTool@0
+  inputs:
+    versionSpec: '20.x'
+  displayName: 'Use Node.js 20.x'
+
+- script: |
+    cd $(nodeAppPath)
+    npm install
+  displayName: 'Install Node.js dependencies'
+
+- script: |
+    cd $(nodeAppPath)
+    npm test
+  displayName: 'Run Node.js tests'
+
+# Publish artifacts
+- task: DotNetCoreCLI@2
+  displayName: 'Publish .NET output'
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: '$(dotnetProjectPath)'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/dotnet'
+    zipAfterPublish: true
+
+- script: |
+    mkdir -p $(Build.ArtifactStagingDirectory)/node
+    cp -r $(nodeAppPath)/* $(Build.ArtifactStagingDirectory)/node/
+  displayName: 'Copy Node.js app to artifacts'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish all artifacts'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
