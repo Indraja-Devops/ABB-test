@@ -25,7 +25,7 @@ steps:
 - script: |
     cd src/dotnet
     dotnet restore
-    displayName: 'Restore NuGet Packages'
+  displayName: 'Restore NuGet Packages'
 
 # # Restore dependencies
 # - script: dotnet restore
