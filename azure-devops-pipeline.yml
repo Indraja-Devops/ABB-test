@@ -3,7 +3,7 @@
 trigger:
   branches:
     include:
-      - main  # change if needed
+      - main
 
 pool:
   name: 'Default'
