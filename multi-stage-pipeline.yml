@@ -1,0 +1,117 @@
+trigger:
+  branches:
+    include:
+      - main
+
+variables:
+  buildConfiguration: 'Release'
+  outputDir: '$(Build.ArtifactStagingDirectory)/publish'
+  azureSubscription: 'YOUR_AZURE_SERVICE_CONNECTION'
+
+  # Environment-specific variables
+  devAppServiceName: 'your-dev-app-service'
+  testAppServiceName: 'your-test-app-service'
+  prodAppServiceName: 'your-prod-app-service'
+
+stages:
+
+- stage: Build
+  displayName: Build Stage
+  jobs:
+  - job: BuildJob
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '8.0.x'
+
+    - checkout: self
+
+    - script: |
+        cd src/dotnet
+        dotnet restore
+        dotnet build abbdotnet.csproj --configuration $(buildConfiguration)
+        dotnet test abbdotnet.csproj --no-build --configuration $(buildConfiguration) --logger "trx;LogFileName=test_results.trx" --results-directory $(Build.SourcesDirectory)/test-results
+        dotnet publish abbdotnet.csproj --configuration $(buildConfiguration) --output $(outputDir)
+      displayName: 'Restore, Build, Test, and Publish'
+
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'VSTest'
+        testResultsFiles: '$(Build.SourcesDirectory)/test-results/*.trx'
+        failTaskOnFailedTests: true
+      condition: succeededOrFailed()
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: '$(outputDir)'
+        artifactName: 'drop'
+
+- stage: Deploy_Dev
+  displayName: Deploy to Dev
+  dependsOn: Build
+  jobs:
+  - deployment: DeployDevJob
+    environment: 'Dev'
+    pool:
+      vmImage: 'ubuntu-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
+
+          - task: AzureWebApp@1
+            displayName: 'Deploy to Azure App Service (Dev)'
+            inputs:
+              azureSubscription: $(azureSubscription)
+              appName: $(devAppServiceName)
+              package: '$(Pipeline.Workspace)/drop/**/*'
+
+- stage: Deploy_Test
+  displayName: Deploy to Test
+  dependsOn: Deploy_Dev
+  jobs:
+  - deployment: DeployTestJob
+    environment: 'Test'
+    pool:
+      vmImage: 'ubuntu-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
+
+          - task: AzureWebApp@1
+            displayName: 'Deploy to Azure App Service (Test)'
+            inputs:
+              azureSubscription: $(azureSubscription)
+              appName: $(testAppServiceName)
+              package: '$(Pipeline.Workspace)/drop/**/*'
+
+- stage: Deploy_Prod
+  displayName: Deploy to Prod
+  dependsOn: Deploy_Test
+  condition: succeeded()
+  jobs:
+  - deployment: DeployProdJob
+    environment: 'Prod'
+    pool:
+      vmImage: 'ubuntu-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
+
+          - task: AzureWebApp@1
+            displayName: 'Deploy to Azure App Service (Prod)'
+            inputs:
+              azureSubscription: $(azureSubscription)
+              appName: $(prodAppServiceName)
+              package: '$(Pipeline.Workspace)/drop/**/*'

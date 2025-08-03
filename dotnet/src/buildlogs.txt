@@ -1,0 +1,205 @@
+2025-08-03T07:28:43.8858622Z ##[section]Starting: Job
+2025-08-03T07:28:44.2859084Z ##[section]Starting: Initialize job
+2025-08-03T07:28:44.2865028Z Agent name: 'abb'
+2025-08-03T07:28:44.2868439Z Agent machine name: 'DESKTOP-46UUB51'
+2025-08-03T07:28:44.2869707Z Current agent version: '4.259.0'
+2025-08-03T07:28:44.6041383Z Agent running as: 'ADI'
+2025-08-03T07:28:44.6085317Z Prepare build directory.
+2025-08-03T07:28:44.6570877Z Set build variables.
+2025-08-03T07:28:44.6601736Z Download all required tasks.
+2025-08-03T07:28:44.8000418Z Checking job knob settings.
+2025-08-03T07:28:44.8004116Z    Knob: DockerActionRetries = true Source: $(VSTSAGENT_DOCKER_ACTION_RETRIES) 
+2025-08-03T07:28:44.8005875Z    Knob: UseGitLongPaths = true Source: $(USE_GIT_LONG_PATHS) 
+2025-08-03T07:28:44.8008380Z    Knob: EnableIssueSourceValidation = true Source: $(ENABLE_ISSUE_SOURCE_VALIDATION) 
+2025-08-03T07:28:44.8009479Z    Knob: AgentEnablePipelineArtifactLargeChunkSize = true Source: $(AGENT_ENABLE_PIPELINEARTIFACT_LARGE_CHUNK_SIZE) 
+2025-08-03T07:28:44.8012475Z    Knob: ContinueAfterCancelProcessTreeKillAttempt = true Source: $(VSTSAGENT_CONTINUE_AFTER_CANCEL_PROCESSTREEKILL_ATTEMPT) 
+2025-08-03T07:28:44.8013369Z    Knob: ProcessHandlerSecureArguments = false Source: $(AZP_75787_ENABLE_NEW_LOGIC) 
+2025-08-03T07:28:44.8013984Z    Knob: ProcessHandlerSecureArguments = false Source: $(AZP_75787_ENABLE_NEW_LOGIC_LOG) 
+2025-08-03T07:28:44.8014557Z    Knob: ProcessHandlerTelemetry = true Source: $(AZP_75787_ENABLE_COLLECT) 
+2025-08-03T07:28:44.8015183Z    Knob: UseNewNodeHandlerTelemetry = True Source: $(DistributedTask.Agent.USENEWNODEHANDLERTELEMETRY) 
+2025-08-03T07:28:44.8015797Z    Knob: ProcessHandlerEnableNewLogic = true Source: $(AZP_75787_ENABLE_NEW_PH_LOGIC) 
+2025-08-03T07:28:44.8016738Z    Knob: EnableResourceMonitorDebugOutput = true Source: $(AZP_ENABLE_RESOURCE_MONITOR_DEBUG_OUTPUT) 
+2025-08-03T07:28:44.8017375Z    Knob: EnableResourceUtilizationWarnings = true Source: $(AZP_ENABLE_RESOURCE_UTILIZATION_WARNINGS) 
+2025-08-03T07:28:44.8018300Z    Knob: IgnoreVSTSTaskLib = true Source: $(AZP_AGENT_IGNORE_VSTSTASKLIB) 
+2025-08-03T07:28:44.8018850Z    Knob: FailJobWhenAgentDies = true Source: $(FAIL_JOB_WHEN_AGENT_DIES) 
+2025-08-03T07:28:44.8019586Z    Knob: CheckForTaskDeprecation = true Source: $(AZP_AGENT_CHECK_FOR_TASK_DEPRECATION) 
+2025-08-03T07:28:44.8020396Z    Knob: CheckIfTaskNodeRunnerIsDeprecated246 = True Source: $(DistributedTask.Agent.CheckIfTaskNodeRunnerIsDeprecated246) 
+2025-08-03T07:28:44.8021585Z    Knob: LogTaskNameInUserAgent = true Source: $(AZP_AGENT_LOG_TASKNAME_IN_USERAGENT) 
+2025-08-03T07:28:44.8022188Z    Knob: UseFetchFilterInCheckoutTask = true Source: $(AGENT_USE_FETCH_FILTER_IN_CHECKOUT_TASK) 
+2025-08-03T07:28:44.8022937Z    Knob: Rosetta2Warning = true Source: $(ROSETTA2_WARNING) 
+2025-08-03T07:28:44.8024616Z    Knob: UseSparseCheckoutInCheckoutTask = true Source: $(AGENT_USE_SPARSE_CHECKOUT_IN_CHECKOUT_TASK) 
+2025-08-03T07:28:44.8025471Z    Knob: AgentCDNConnectivityFailWarning = False Source: $(DistributedTask.Agent.AgentCDNConnectivityFailWarning) 
+2025-08-03T07:28:44.8025881Z Finished checking job knob settings.
+2025-08-03T07:28:44.8037411Z ##[section]Async Command Start: WindowsPreinstalledGitTelemetry
+2025-08-03T07:28:44.8038400Z ##[section]Async Command End: WindowsPreinstalledGitTelemetry
+2025-08-03T07:28:44.8448025Z Start tracking orphan processes.
+2025-08-03T07:28:44.8500656Z ##[section]Finishing: Initialize job
+2025-08-03T07:28:44.8561192Z ##[section]Async Command Start: WindowsPreinstalledGitTelemetry
+2025-08-03T07:28:44.8561774Z ##[section]Async Command End: WindowsPreinstalledGitTelemetry
+2025-08-03T07:28:44.8562876Z ##[section]Async Command Start: WindowsPreinstalledGitTelemetry
+2025-08-03T07:28:44.8563314Z ##[section]Async Command End: WindowsPreinstalledGitTelemetry
+2025-08-03T07:28:44.8564351Z ##[section]Async Command Start: WindowsPreinstalledGitTelemetry
+2025-08-03T07:28:44.8564781Z ##[section]Async Command End: WindowsPreinstalledGitTelemetry
+2025-08-03T07:28:44.8742748Z ##[section]Starting: UseDotNet
+2025-08-03T07:28:44.8882501Z ==============================================================================
+2025-08-03T07:28:44.8883433Z Task         : Use .NET Core
+2025-08-03T07:28:44.8883823Z Description  : Acquires a specific version of the .NET Core SDK from the internet or the local cache and adds it to the PATH. Use this task to change the version of .NET Core used in subsequent tasks. Additionally provides proxy support.
+2025-08-03T07:28:44.8884248Z Version      : 2.259.1
+2025-08-03T07:28:44.8884572Z Author       : Microsoft Corporation
+2025-08-03T07:28:44.8884922Z Help         : https://aka.ms/AA4xgy0
+2025-08-03T07:28:44.8885087Z ==============================================================================
+2025-08-03T07:28:45.4881907Z Tool to install: .NET Core sdk version 8.0.x.
+2025-08-03T07:28:46.0513700Z Found version 8.0.412 in channel 8.0 for user specified version spec: 8.0.x
+2025-08-03T07:28:46.1366857Z Version: 8.0.412 was found in cache.
+2025-08-03T07:28:46.1386814Z Creating global tool path and pre-pending to PATH.
+2025-08-03T07:28:46.1430865Z ##[section]Finishing: UseDotNet
+2025-08-03T07:28:46.1525809Z ##[section]Starting: Checkout Indraja-Devops/ABB-test@main to s
+2025-08-03T07:28:46.1551768Z ==============================================================================
+2025-08-03T07:28:46.1552483Z Task         : Get sources
+2025-08-03T07:28:46.1552833Z Description  : Get sources from a repository. Supports Git, TfsVC, and SVN repositories.
+2025-08-03T07:28:46.1553411Z Version      : 1.0.0
+2025-08-03T07:28:46.1553761Z Author       : Microsoft
+2025-08-03T07:28:46.1555054Z Help         : [More Information](https://go.microsoft.com/fwlink/?LinkId=798199)
+2025-08-03T07:28:46.1555763Z ==============================================================================
+2025-08-03T07:28:46.7407319Z Syncing repository: Indraja-Devops/ABB-test (GitHub)
+2025-08-03T07:28:46.7426881Z Prepending Path environment variable with directory containing 'git.exe'.
+2025-08-03T07:28:46.7430708Z ##[command]git version
+2025-08-03T07:28:46.7950882Z git version 2.49.0.windows.1
+2025-08-03T07:28:46.7992984Z ##[command]git lfs version
+2025-08-03T07:28:47.0898462Z git-lfs/3.4.0 (GitHub; windows amd64; go 1.20.6; git d06d6e9e)
+2025-08-03T07:28:47.1097196Z ##[command]git config --get remote.origin.url
+2025-08-03T07:28:47.2253415Z ##[command]git clean -ffdx
+2025-08-03T07:28:47.4193295Z Removing src/dotnet/bin/
+2025-08-03T07:28:47.4225503Z Removing src/dotnet/obj/
+2025-08-03T07:28:47.4370108Z ##[command]git reset --hard HEAD
+2025-08-03T07:28:47.6596759Z HEAD is now at 3e0a38d Merge c214894238b2d61d0e29b4401c91687b3ea5f54f into a03e4d726b76fcea9e6330ac41991943f96b65eb
+2025-08-03T07:28:47.6679348Z ##[command]git sparse-checkout disable
+2025-08-03T07:28:47.8111381Z ##[command]git config gc.auto 0
+2025-08-03T07:28:47.9162456Z ##[command]git config core.longpaths true
+2025-08-03T07:28:47.9263600Z ##[command]git config --get-all http.https://github.com/Indraja-Devops/ABB-test.extraheader
+2025-08-03T07:28:48.0496422Z warning: unable to access '.git/config': Permission denied
+2025-08-03T07:28:48.0611030Z ##[command]git config --get-all http.extraheader
+2025-08-03T07:28:48.2307982Z ##[command]git config --get-regexp .*extraheader
+2025-08-03T07:28:48.3715961Z ##[command]git config --get-all http.proxy
+2025-08-03T07:28:48.5236660Z ##[command]git config http.version HTTP/1.1
+2025-08-03T07:28:48.6468527Z ##[command]git --config-env=http.extraheader=env_var_http.extraheader fetch --force --tags --prune --prune-tags --progress --no-recurse-submodules origin --depth=1  +223da95a6e64f0afa22ef147905769ecb506f028:refs/remotes/origin/223da95a6e64f0afa22ef147905769ecb506f028
+2025-08-03T07:28:50.5158711Z remote: Enumerating objects: 1, done.        
+2025-08-03T07:28:50.5164004Z remote: Counting objects: 100% (1/1)        
+2025-08-03T07:28:50.5168181Z remote: Counting objects: 100% (1/1), done.        
+2025-08-03T07:28:50.5170740Z remote: Total 1 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)        
+2025-08-03T07:28:50.6291673Z From https://github.com/Indraja-Devops/ABB-test
+2025-08-03T07:28:50.6294588Z  * [new ref]         223da95a6e64f0afa22ef147905769ecb506f028 -> origin/223da95a6e64f0afa22ef147905769ecb506f028
+2025-08-03T07:28:50.8774458Z ##[command]git --config-env=http.extraheader=env_var_http.extraheader fetch --force --tags --prune --prune-tags --progress --no-recurse-submodules origin --depth=1  +223da95a6e64f0afa22ef147905769ecb506f028
+2025-08-03T07:28:52.5477861Z remote: Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)        
+2025-08-03T07:28:52.6517740Z From https://github.com/Indraja-Devops/ABB-test
+2025-08-03T07:28:52.6557081Z  * branch            223da95a6e64f0afa22ef147905769ecb506f028 -> FETCH_HEAD
+2025-08-03T07:28:52.8278659Z ##[command]git checkout --progress --force refs/remotes/origin/223da95a6e64f0afa22ef147905769ecb506f028
+2025-08-03T07:28:52.8441459Z Previous HEAD position was 3e0a38d Merge c214894238b2d61d0e29b4401c91687b3ea5f54f into a03e4d726b76fcea9e6330ac41991943f96b65eb
+2025-08-03T07:28:52.8443831Z HEAD is now at 223da95 Merge pull request #3 from Indraja-Devops/feature/hello-world
+2025-08-03T07:28:52.8700158Z ##[section]Finishing: Checkout Indraja-Devops/ABB-test@main to s
+2025-08-03T07:28:52.8796973Z ##[section]Starting: Restore NuGet Packages
+2025-08-03T07:28:52.8847227Z ==============================================================================
+2025-08-03T07:28:52.8847772Z Task         : Command line
+2025-08-03T07:28:52.8848013Z Description  : Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
+2025-08-03T07:28:52.8848488Z Version      : 2.250.1
+2025-08-03T07:28:52.8848721Z Author       : Microsoft Corporation
+2025-08-03T07:28:52.8849009Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/command-line
+2025-08-03T07:28:52.8849452Z ==============================================================================
+2025-08-03T07:28:56.2949581Z Generating script.
+2025-08-03T07:28:56.3358440Z ========================== Starting Command Output ===========================
+2025-08-03T07:28:56.3717077Z ##[command]"C:\Windows\system32\cmd.exe" /D /E:ON /V:OFF /S /C "CALL "C:\Users\ADI\agent\_work\_temp\1285bbb3-5634-4b1d-9f34-721b3c6843ce.cmd""
+2025-08-03T07:28:57.5235118Z   Determining projects to restore...
+2025-08-03T07:28:58.0272696Z   Restored C:\Users\ADI\agent\_work\1\s\src\dotnet\abbdotnet.csproj (in 138 ms).
+2025-08-03T07:28:58.1574490Z ##[section]Finishing: Restore NuGet Packages
+2025-08-03T07:28:58.1646350Z ##[section]Starting: Build Solution
+2025-08-03T07:28:58.1691335Z ==============================================================================
+2025-08-03T07:28:58.1691828Z Task         : Command line
+2025-08-03T07:28:58.1692035Z Description  : Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
+2025-08-03T07:28:58.1692392Z Version      : 2.250.1
+2025-08-03T07:28:58.1692561Z Author       : Microsoft Corporation
+2025-08-03T07:28:58.1692951Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/command-line
+2025-08-03T07:28:58.1693284Z ==============================================================================
+2025-08-03T07:29:01.2560489Z Generating script.
+2025-08-03T07:29:01.3219740Z ========================== Starting Command Output ===========================
+2025-08-03T07:29:01.3673552Z ##[command]"C:\Windows\system32\cmd.exe" /D /E:ON /V:OFF /S /C "CALL "C:\Users\ADI\agent\_work\_temp\b4cfee0c-19cf-4744-a6b1-d09cf43340ca.cmd""
+2025-08-03T07:29:02.7182696Z   Determining projects to restore...
+2025-08-03T07:29:03.1362192Z   All projects are up-to-date for restore.
+2025-08-03T07:29:06.5971446Z   abbdotnet -> C:\Users\ADI\agent\_work\1\s\src\dotnet\bin\Release\net8.0\abbdotnet.dll
+2025-08-03T07:29:06.6180998Z 
+2025-08-03T07:29:06.6190252Z Build succeeded.
+2025-08-03T07:29:06.6192037Z     0 Warning(s)
+2025-08-03T07:29:06.6192373Z     0 Error(s)
+2025-08-03T07:29:06.6200671Z 
+2025-08-03T07:29:06.6201707Z Time Elapsed 00:00:04.67
+2025-08-03T07:29:06.7224929Z ##[section]Finishing: Build Solution
+2025-08-03T07:29:06.7312778Z ##[section]Starting: Run Unit Tests
+2025-08-03T07:29:06.7352934Z ==============================================================================
+2025-08-03T07:29:06.7353661Z Task         : Command line
+2025-08-03T07:29:06.7354005Z Description  : Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
+2025-08-03T07:29:06.7354665Z Version      : 2.250.1
+2025-08-03T07:29:06.7355007Z Author       : Microsoft Corporation
+2025-08-03T07:29:06.7355533Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/command-line
+2025-08-03T07:29:06.7356181Z ==============================================================================
+2025-08-03T07:29:10.3714243Z Generating script.
+2025-08-03T07:29:10.4305077Z ========================== Starting Command Output ===========================
+2025-08-03T07:29:10.5049304Z ##[command]"C:\Windows\system32\cmd.exe" /D /E:ON /V:OFF /S /C "CALL "C:\Users\ADI\agent\_work\_temp\1a710340-243b-450f-8cbd-e3302985432a.cmd""
+2025-08-03T07:29:11.6852791Z ##[section]Finishing: Run Unit Tests
+2025-08-03T07:29:11.6954206Z ##[section]Starting: Publish Application
+2025-08-03T07:29:11.6968205Z ==============================================================================
+2025-08-03T07:29:11.6968699Z Task         : Command line
+2025-08-03T07:29:11.6968886Z Description  : Run a command line script using Bash on Linux and macOS and cmd.exe on Windows
+2025-08-03T07:29:11.6969200Z Version      : 2.250.1
+2025-08-03T07:29:11.6969372Z Author       : Microsoft Corporation
+2025-08-03T07:29:11.6969571Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/command-line
+2025-08-03T07:29:11.6969868Z ==============================================================================
+2025-08-03T07:29:14.8321337Z Generating script.
+2025-08-03T07:29:14.9004028Z ========================== Starting Command Output ===========================
+2025-08-03T07:29:14.9442873Z ##[command]"C:\Windows\system32\cmd.exe" /D /E:ON /V:OFF /S /C "CALL "C:\Users\ADI\agent\_work\_temp\2273bf6e-abd9-47ea-b9fb-70a92b8afae2.cmd""
+2025-08-03T07:29:16.1674330Z   Determining projects to restore...
+2025-08-03T07:29:16.5526284Z   All projects are up-to-date for restore.
+2025-08-03T07:29:17.2571615Z   abbdotnet -> C:\Users\ADI\agent\_work\1\s\src\dotnet\bin\Release\net8.0\abbdotnet.dll
+2025-08-03T07:29:17.3357534Z   abbdotnet -> C:\Users\ADI\agent\_work\1\a\publish\
+2025-08-03T07:29:17.4804753Z ##[section]Finishing: Publish Application
+2025-08-03T07:29:17.4909849Z ##[section]Starting: PublishBuildArtifacts
+2025-08-03T07:29:17.4928754Z ==============================================================================
+2025-08-03T07:29:17.4929126Z Task         : Publish build artifacts
+2025-08-03T07:29:17.4929377Z Description  : Publish build artifacts to Azure Pipelines or a Windows file share
+2025-08-03T07:29:17.4929799Z Version      : 1.247.1
+2025-08-03T07:29:17.4930063Z Author       : Microsoft Corporation
+2025-08-03T07:29:17.4930272Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/publish-build-artifacts
+2025-08-03T07:29:17.4930580Z ==============================================================================
+2025-08-03T07:29:18.0248630Z ##[section]Async Command Start: Upload Artifact
+2025-08-03T07:29:18.0250351Z Uploading 5 files
+2025-08-03T07:29:18.5338458Z Using default max parallelism.
+2025-08-03T07:29:18.5339116Z Creating dedup client:
+2025-08-03T07:29:18.5339414Z  - Max dedup parallelism: 192
+2025-08-03T07:29:18.5339645Z  - Using blobstore domain: 0
+2025-08-03T07:29:18.5339869Z  - Using redirect timeout: 
+2025-08-03T07:29:18.5340062Z  - Hash type: Dedup64K
+2025-08-03T07:29:18.5340260Z Building file tree
+2025-08-03T07:29:19.0365127Z Uploaded 0 out of 166,107 bytes.
+2025-08-03T07:29:19.5437004Z Uploaded 166,107 out of 166,107 bytes.
+2025-08-03T07:29:19.5438230Z Associating files
+2025-08-03T07:29:19.5440322Z Total files: 5 ---- Associated files: 0 (0%)
+2025-08-03T07:29:20.4394953Z File upload succeed.
+2025-08-03T07:29:20.4395658Z Upload 'C:\Users\ADI\agent\_work\1\a\publish' to file container: '#/75764892/drop'
+2025-08-03T07:29:20.4396268Z Associated artifact 2 with build 19
+2025-08-03T07:29:20.4396816Z ##[section]Async Command End: Upload Artifact
+2025-08-03T07:29:20.4402811Z ##[section]Finishing: PublishBuildArtifacts
+2025-08-03T07:29:20.4814689Z ##[section]Starting: Checkout Indraja-Devops/ABB-test@main to s
+2025-08-03T07:29:20.4830836Z ==============================================================================
+2025-08-03T07:29:20.4831802Z Task         : Get sources
+2025-08-03T07:29:20.4832279Z Description  : Get sources from a repository. Supports Git, TfsVC, and SVN repositories.
+2025-08-03T07:29:20.4833147Z Version      : 1.0.0
+2025-08-03T07:29:20.4833596Z Author       : Microsoft
+2025-08-03T07:29:20.4834071Z Help         : [More Information](https://go.microsoft.com/fwlink/?LinkId=798199)
+2025-08-03T07:29:20.4835132Z ==============================================================================
+2025-08-03T07:29:20.9231663Z Cleaning any cached credential from repository: Indraja-Devops/ABB-test (GitHub)
+2025-08-03T07:29:20.9367701Z ##[section]Finishing: Checkout Indraja-Devops/ABB-test@main to s
+2025-08-03T07:29:20.9488015Z ##[section]Starting: Finalize Job
+2025-08-03T07:29:20.9524057Z Cleaning up task key
+2025-08-03T07:29:20.9528918Z Start cleaning up orphan processes.
+2025-08-03T07:29:20.9780042Z Terminate orphan process: pid (6208) (dotnet)
+2025-08-03T07:29:20.9802198Z Terminate orphan process: pid (5152) (conhost)
+2025-08-03T07:29:20.9809079Z ##[section]Finishing: Finalize Job
+2025-08-03T07:29:20.9895395Z ##[section]Finishing: Job

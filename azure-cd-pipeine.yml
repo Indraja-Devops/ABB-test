@@ -1,0 +1,100 @@
+trigger:
+  branches:
+    include:
+      - main
+
+variables:
+  buildConfiguration: 'Release'
+  outputDir: '$(Build.ArtifactStagingDirectory)/publish'
+  azureSubscription: 'YOUR_AZURE_SERVICE_CONNECTION' 
+  appServiceName: 'your-app-service-name'            # For Azure App Service
+  aksResourceGroup: 'your-aks-resource-group'        # For AKS
+  aksClusterName: 'your-aks-cluster-name'            # For AKS
+  kubernetesNamespace: 'default'                     
+
+stages:
+
+- stage: Build
+  jobs:
+  - job: BuildJob
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '8.0.x'
+
+    - checkout: self
+
+    - script: |
+        cd src/dotnet
+        dotnet restore
+        dotnet build abbdotnet.csproj --configuration $(buildConfiguration)
+        dotnet test abbdotnet.csproj --no-build --configuration $(buildConfiguration) --logger "trx;LogFileName=test_results.trx" --results-directory $(Build.SourcesDirectory)/test-results
+        dotnet publish abbdotnet.csproj --configuration $(buildConfiguration) --output $(outputDir)
+      displayName: 'Build, Test, Publish'
+
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'VSTest'
+        testResultsFiles: '$(Build.SourcesDirectory)/test-results/*.trx'
+        failTaskOnFailedTests: true
+      condition: succeededOrFailed()
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: '$(outputDir)'
+        artifactName: 'drop'
+
+- stage: Deploy_Dev
+  dependsOn: Build
+  jobs:
+  - deployment: DeployDev
+    environment: 'dev'
+    pool:
+      vmImage: 'ubuntu-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
+
+          # Azure App Service deployment example:
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: $(azureSubscription)
+              appName: $(appServiceName)
+              package: '$(Pipeline.Workspace)/drop/**/*'
+
+          # OR AKS deployment example (uncomment and configure accordingly):
+          # - task: AzureCLI@2
+          #   inputs:
+          #     azureSubscription: $(azureSubscription)
+          #     scriptType: bash
+          #     scriptLocation: inlineScript
+          #     inlineScript: |
+          #       az aks get-credentials --resource-group $(aksResourceGroup) --name $(aksClusterName)
+          #       kubectl apply -f k8s/deployment.yaml -n $(kubernetesNamespace)
+
+- stage: Deploy_Prod
+  dependsOn: Deploy_Dev
+  condition: succeeded()
+  jobs:
+  - deployment: DeployProd
+    environment: 'production'
+    pool:
+      vmImage: 'ubuntu-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
+
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: $(azureSubscription)
+              appName: $(appServiceName)
+              package: '$(Pipeline.Workspace)/drop/**/*'
