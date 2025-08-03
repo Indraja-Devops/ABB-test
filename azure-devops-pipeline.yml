@@ -60,7 +60,7 @@ steps:
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'VSTest'
-    testResultsFiles: 'src/dotnet/test_results.trx'
+    testResultsFiles: 'src/dotnet/TestResults/test_results.trx'
     failTaskOnFailedTests: true
   condition: succeededOrFailed()
   displayName: 'Publish Test Results'
