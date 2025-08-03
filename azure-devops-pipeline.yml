@@ -55,3 +55,13 @@ steps:
     pathToPublish: '$(outputDir)'
     artifactName: 'drop'
     publishLocation: 'Container'
+
+# Publish test results (for UI reporting)
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: '**/*.trx'
+    failTaskOnFailedTests: true
+  condition: succeededOrFailed()
+  displayName: 'Publish Test Results'
+
