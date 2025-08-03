@@ -1,0 +1,21 @@
+# build docker image:
+
+docker build -t abb-nginx-app .
+
+# Push to Azure Container Registry (ACR):
+
+az login
+
+az acr create --resource-group abb_rg --name abb_acr --sku Basic
+
+az acr login --name abb_acr
+
+az acr list --resource-group abb_rg --query "[].loginServer" --output tsv
+
+# Tag the image:
+
+docker tag abb-nginx-app:latest myuniqueacrname.azurecr.io/abb-nginx-app:latest
+
+# push the Image to Acr:
+
+docker push myuniqueacrname.azurecr.io/abb-nginx-app:latest
