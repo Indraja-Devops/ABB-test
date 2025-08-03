@@ -1,0 +1,3 @@
+appName: app-prod
+replicaCount: 3
+imageTag: prod-latest

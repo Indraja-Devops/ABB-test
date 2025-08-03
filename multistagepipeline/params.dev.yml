@@ -1,0 +1,3 @@
+appName: abb-dev
+replicaCount: 1
+imageTag: dev-latest

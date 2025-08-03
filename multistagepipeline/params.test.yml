@@ -1,0 +1,3 @@
+appName: app-test
+replicaCount: 1
+imageTag: dit-latest

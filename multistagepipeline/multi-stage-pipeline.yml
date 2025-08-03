@@ -1,0 +1,38 @@
+trigger:
+- main
+
+stages:
+- stage: Build
+  jobs:
+  - job: BuildJob
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo "Building the app..."
+      displayName: 'Build step'
+    # Add build steps here
+
+- stage: Deploy
+  dependsOn: Build
+  variables:
+    environment: ${{ parameters.environment }}
+  jobs:
+  - deployment: DeployJob
+    environment: ${{ variables.environment }}
+    pool:
+      vmImage: 'ubuntu-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifact: 'drop'
+              path: '$(Pipeline.Workspace)'
+          - script: |
+              echo "Deploying to ${{ variables.environment }}"
+              # Load env-specific params
+              params_file="params.${{ variables.environment }}.yml"
+              cat $params_file
+              # Use params to deploy app (e.g., helm upgrade, kubectl apply, etc.)
+            displayName: 'Deploy using env-specific parameters'
