@@ -40,7 +40,7 @@ steps:
 # Run unit tests
 - script: |
     cd src/dotnet
-    dotnet test abbdotnet.csproj --no-build --configuration $(buildConfiguration) --logger:trx
+    dotnet test abbdotnet.csproj --no-build --configuration $(buildConfiguration) -logger "trx;LogFileName=test_results.trx"
   displayName: 'Run Unit Tests'
 
 # Publish the app
@@ -60,7 +60,7 @@ steps:
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'VSTest'
-    testResultsFiles: 'src/dotnet/TestResults/*.trx'
+    testResultsFiles: 'src/dotnet/test_results.trx'
     failTaskOnFailedTests: true
   condition: succeededOrFailed()
   displayName: 'Publish Test Results'
