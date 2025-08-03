@@ -1,0 +1,54 @@
+trigger:
+  branches:
+    include:
+      - main
+
+variables:
+  azureServiceConnection: 'YOUR-AZURE-SERVICE-CONNECTION-NAME'
+  tfWorkingDirectory: 'infra/aks'       # Path to your Terraform files in repo
+  tfBackendStorageAccount: 'yourtfstate' # Azure Storage Account for remote state (optional)
+  tfBackendContainer: 'tfstatecontainer' # Azure Blob container for remote state
+  tfBackendKey: 'aks.terraform.tfstate'   # State file name
+
+stages:
+- stage: Terraform_Deploy
+  displayName: 'Terraform AKS Deployment'
+  jobs:
+  - job: Terraform
+    displayName: 'Run Terraform'
+    pool:
+      vmImage: 'ubuntu-latest'
+
+    steps:
+    - task: AzureCLI@2
+      displayName: 'Login to Azure'
+      inputs:
+        azureSubscription: $(azureServiceConnection)
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          echo "Logged into Azure"
+
+    - task: TerraformInstaller@1
+      displayName: 'Install Terraform'
+      inputs:
+        terraformVersion: '1.5.6' # Or desired version
+
+    - script: |
+        cd $(tfWorkingDirectory)
+        terraform init \
+          -backend-config="storage_account_name=$(tfBackendStorageAccount)" \
+          -backend-config="container_name=$(tfBackendContainer)" \
+          -backend-config="key=$(tfBackendKey)" \
+          -backend-config="resource_group_name=YOUR_RESOURCE_GROUP"  # replace accordingly
+      displayName: 'Terraform Init'
+
+    - script: |
+        cd $(tfWorkingDirectory)
+        terraform plan -out=tfplan -input=false
+      displayName: 'Terraform Plan'
+
+    - script: |
+        cd $(tfWorkingDirectory)
+        terraform apply -input=false -auto-approve tfplan
+      displayName: 'Terraform Apply'
