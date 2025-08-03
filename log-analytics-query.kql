@@ -1,0 +1,6 @@
+// Query: AKS Pod Failures in the Last 24 Hours
+KubePodInventory
+| where TimeGenerated > ago(24h)
+| where Phase != "Running"
+| project TimeGenerated, ClusterName, Namespace, Name, Phase, Reason, ContainerID
+| order by TimeGenerated desc

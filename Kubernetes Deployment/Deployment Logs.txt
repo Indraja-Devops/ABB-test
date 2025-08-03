@@ -1,0 +1,12 @@
+kubectl apply -f deployment.yaml
+
+kubectl rollout status deployment nginx-deployment
+
+## check pod logs:
+
+kubectl logs nginx
+
+## also export outputs to text:
+
+kubectl get pods > get-pods.txt
+kubectl describe pod nginx > pod-describe.txt

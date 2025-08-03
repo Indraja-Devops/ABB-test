@@ -1,0 +1,22 @@
+[
+  {
+    "Message": "System.NullReferenceException: Object reference not set to an instance of an object.",
+    "TimeGenerated": "2025-08-03T08:00:00Z",
+    "ErrorCount": 42
+  },
+  {
+    "Message": "Timeout expired. The timeout period elapsed prior to completion of the operation.",
+    "TimeGenerated": "2025-08-03T07:00:00Z",
+    "ErrorCount": 18
+  },
+  {
+    "Message": "SqlException: Cannot insert duplicate key in object 'dbo.Users'.",
+    "TimeGenerated": "2025-08-03T06:00:00Z",
+    "ErrorCount": 9
+  },
+  {
+    "Message": "UnauthorizedAccessException: Access to the path is denied.",
+    "TimeGenerated": "2025-08-03T05:00:00Z",
+    "ErrorCount": 6
+  }
+]

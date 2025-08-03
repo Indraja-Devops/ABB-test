@@ -1,0 +1,66 @@
+
+
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  name: 'Default'
+
+variables:
+  buildConfiguration: 'Release'
+  outputDir: '$(Build.ArtifactStagingDirectory)/publish'
+
+steps:
+# Install .NET SDK
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '8.0.x'  # Use your .NET version
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- checkout: self
+
+- script: |
+    cd src/dotnet
+    dotnet restore
+  displayName: 'Restore NuGet Packages'
+
+# # Restore dependencies
+# - script: dotnet restore
+#   displayName: 'Restore NuGet Packages'
+
+# Build solution
+- script: |
+    cd src/dotnet
+    dotnet build abbdotnet.csproj --configuration $(buildConfiguration)
+  displayName: 'Build Solution'
+
+# Run unit tests
+- script: |
+    cd src/dotnet
+    dotnet test abbdotnet.csproj --no-build --configuration $(buildConfiguration) --logger "trx;LogFileName=test_results.trx" --results-directory $(Build.SourcesDirectory)/test-results
+  displayName: 'Run Unit Tests'
+
+# Publish the app
+- script: |
+    cd src/dotnet
+    dotnet publish abbdotnet.csproj --configuration $(buildConfiguration) --output $(outputDir)
+  displayName: 'Publish Application'
+
+# Publish artifacts for later use or deployment
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(outputDir)'
+    artifactName: 'drop'
+    publishLocation: 'Container'
+
+# Publish test results (for UI reporting)
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: '$(Build.SourcesDirectory)/test-results/test_results.trx'
+    failTaskOnFailedTests: true
+  condition: succeededOrFailed()
+  displayName: 'Publish Test Results'

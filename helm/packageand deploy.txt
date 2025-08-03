@@ -1,0 +1,4 @@
+helm package app-chart
+helm install app ./app-0.1.0.tgz
+
+helm install ... > helm-deploy.log 2>&1

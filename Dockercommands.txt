@@ -1,0 +1,8 @@
+## rebuild and push update image:
+
+docker build -t nginx:secure .
+docker tag myapp:secure abb.acr.azurecr.io/myapp:v2
+docker push <your-acr-name>.azurecr.io/nginx:v2
+
+
+

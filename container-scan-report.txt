@@ -1,0 +1,19 @@
+Container Image: nginx:latest
+Scan Date: 2025-08-03
+Scanner: Trivy
+
+Vulnerabilities Found:
+-----------------------
+1. CVE-2023-12345
+   - Package: openssl
+   - Installed Version: 1.1.1k
+   - Fixed Version: 1.1.1w
+   - Severity: HIGH
+   - Description: Buffer overflow in X.509 certificate parsing
+
+2. CVE-2022-54321
+   - Package: curl
+   - Installed Version: 7.68.0
+   - Fixed Version: 7.88.1
+   - Severity: MEDIUM
+   - Description: Improper certificate validation
