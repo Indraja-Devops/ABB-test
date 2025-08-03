@@ -40,7 +40,7 @@ steps:
 # Run unit tests
 - script: |
     cd src/dotnet
-    dotnet test abbdotnet.csproj --no-build --configuration $(buildConfiguration) -logger "trx;LogFileName=test_results.trx"
+    dotnet test abbdotnet.csproj --no-build --configuration $(buildConfiguration) --logger "trx;LogFileName=test_results.trx"
   displayName: 'Run Unit Tests'
 
 # Publish the app
