@@ -20,9 +20,16 @@ steps:
     version: '8.0.x'  # Use your .NET version
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
-# Restore dependencies
-- script: dotnet restore
-  displayName: 'Restore NuGet Packages'
+- checkout: self
+
+- script: |
+    cd src/dotnet
+    dotnet restore
+    displayName: 'Restore NuGet Packages'
+
+# # Restore dependencies
+# - script: dotnet restore
+#   displayName: 'Restore NuGet Packages'
 
 # Build solution
 - script: dotnet build --configuration $(buildConfiguration) --no-restore
