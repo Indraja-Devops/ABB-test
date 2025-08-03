@@ -32,15 +32,21 @@ steps:
 #   displayName: 'Restore NuGet Packages'
 
 # Build solution
-- script: dotnet build --configuration $(buildConfiguration) --no-restore
+- script: |
+    cd src/dotnet
+    dotnet build abbdotnet.csproj --configuration $(buildConfiguration)
   displayName: 'Build Solution'
 
 # Run unit tests
-- script: dotnet test --no-build --configuration $(buildConfiguration) --logger:trx
+- script: |
+    cd src/dotnet
+    dotnet test abbdotnet.csproj --no-build --configuration $(buildConfiguration) --logger:trx
   displayName: 'Run Unit Tests'
 
 # Publish the app
-- script: dotnet publish --configuration $(buildConfiguration) --output $(outputDir)
+- script: |
+    cd src/dotnet
+    dotnet publish abbdotnet.csproj --configuration $(buildConfiguration) --output $(outputDir)
   displayName: 'Publish Application'
 
 # Publish artifacts for later use or deployment
